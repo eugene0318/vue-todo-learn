@@ -21,22 +21,22 @@ import TodoFooter from "./components/TodoFooter.vue";
 
 export default {
   name: "App",
-  data: function () {
+  data() {
     return {
       todoItems: [],
     };
   },
   methods: {
-    addOneItem: function (todoItem) {
-      var obj = { completed: false, item: todoItem };
+    addOneItem(todoItem) {
+      const obj = { completed: false, item: todoItem };
       localStorage.setItem(todoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
     },
-    removeOneItem: function (todoItem, index) {
+    removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem);
       this.todoItems.splice(index, 1);
     },
-    toggleOneItem: function (todoItem, index) {
+    toggleOneItem(todoItem, index) {
       //console.log(todoItem.item, index);
       //todoItem.completed = !todoItem.completed;
       this.todoItems[index].completed = !this.todoItems[index].completed;
@@ -44,14 +44,14 @@ export default {
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-    clearAllItem: function () {
+    clearAllItem() {
       localStorage.clear();
       this.todoItems = [];
     },
   },
   created: function () {
     if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
+      for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
           //this.todoItems.push(localStorage.key(i));
           this.todoItems.push(

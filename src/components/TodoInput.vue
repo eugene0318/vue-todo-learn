@@ -2,31 +2,28 @@
   <div class="inputBox shadow">
     <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodoItem" />
     <button v-on:click="addTodo"></button>
-    <!-- <span class="addContainer" v-on:click="addTodo">
+    <span class="addContainer" v-on:click="addTodo">
       <i class="fa-solid fa-plus"></i>
-    </span> -->
-    <AlertModal v-if="showModal" @close="showModal = false">
-      <!--
-      you can use custom content here to overwrite
-      default content
-    -->
+    </span>
+    <!-- <AlertModal v-if="showModal" @close="showModal = false">
+      
       <h3 slot="header">경고</h3>
 
-      바디 : 무언가를 입력하세요.
-    </AlertModal>
+      아무것도 입력하지 않으셨습니다.
+    </AlertModal> -->
   </div>
 </template>
 <script>
-import AlertModal from "./common/AlertModal.vue";
+//import AlertModal from "./common/AlertModal.vue";
 export default {
-  data: function () {
+  data() {
     return {
       newTodoItem: "",
       showModal: true,
     };
   },
   methods: {
-    addTodo: function () {
+    addTodo() {
       if (this.newTodoItem !== "") {
         this.$emit("addTodoItem", this.newTodoItem);
         this.clearInput();
@@ -37,13 +34,13 @@ export default {
       //var obj = { completed: false, item: this.newTodoItem };
       //localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
     },
-    clearInput: function () {
+    clearInput() {
       this.newTodoItem = "";
     },
   },
-  components: {
-    AlertModal: AlertModal,
-  },
+  // components: {
+  //   AlertModal: AlertModal,
+  // },
 };
 </script>
 

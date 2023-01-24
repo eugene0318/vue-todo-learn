@@ -1,6 +1,6 @@
 <template lang="">
   <div>
-    <ul>
+    <TransitionGroup name="list" tag="ul">
       <li
         v-for="(todoItem, index) in propsdata"
         v-bind:key="todoItem.item"
@@ -20,18 +20,18 @@
           delete
         </button>
       </li>
-    </ul>
+    </TransitionGroup>
   </div>
 </template>
 <script>
 export default {
   props: ["propsdata"],
   methods: {
-    removeTodo: function (todoItem, index) {
+    removeTodo(todoItem, index) {
       //console.log(todoItem, index);
       this.$emit("removeItem", todoItem, index);
     },
-    toggleComplete: function (todoItem, index) {
+    toggleComplete(todoItem, index) {
       this.$emit("toggleItem", todoItem, index);
     },
   },
@@ -44,5 +44,14 @@ export default {
 }
 .checkBtnCompleted {
   color: #b3adad;
+}
+/* 리스트 아이템 트랜지션 효과 */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px); /* 밑으로 살짝 빠지는 효과 */
 }
 </style>
