@@ -5,26 +5,44 @@
     <!-- <span class="addContainer" v-on:click="addTodo">
       <i class="fa-solid fa-plus"></i>
     </span> -->
+    <AlertModal v-if="showModal" @close="showModal = false">
+      <!--
+      you can use custom content here to overwrite
+      default content
+    -->
+      <h3 slot="header">경고</h3>
+
+      바디 : 무언가를 입력하세요.
+    </AlertModal>
   </div>
 </template>
 <script>
+import AlertModal from "./common/AlertModal.vue";
 export default {
   data: function () {
     return {
       newTodoItem: "",
+      showModal: true,
     };
   },
   methods: {
     addTodo: function () {
+      if (this.newTodoItem !== "") {
+        this.$emit("addTodoItem", this.newTodoItem);
+        this.clearInput();
+      }
       //console.log(this.newTodoItem);
       //저장하는 로직을 수행
       // this.newTodoItem = "";
-      var obj = { completed: false, item: this.newTodoItem };
-      localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+      //var obj = { completed: false, item: this.newTodoItem };
+      //localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
     },
     clearInput: function () {
       this.newTodoItem = "";
     },
+  },
+  components: {
+    AlertModal: AlertModal,
   },
 };
 </script>
