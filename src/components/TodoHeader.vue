@@ -1,5 +1,5 @@
 <template lang="">
-  <h1>header</h1>
+  <h1>{{ this.$store.state.headerText }}</h1>
 </template>
 <script>
 export default {};
